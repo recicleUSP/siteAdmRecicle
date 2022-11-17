@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --background: 201 211 219;
+    --background-light: 245 245 245;
+    --yellow: 252 185 78;
+    --yellowlight:245 214 124;
+    --green: 3 86 48;
+    --greenTransition:113 208 170;
+    --greenlight:0 202 128;
+    --cinza-title:195 189 189;
+    --red:244 77 78;
+    --redlight: 243 110 110;
+
+    
+}
+
+.btn {
+    border-radius: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .4rem;
+    padding-bottom: .5rem;
+}
+
+
+
+
+.btn-green {
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(var(--green));
+    color:  white;
+    border-color: rgb(var(--green));
+}
+.btn-green-light {
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(var(--greenlight));
+    color:  white;
+    border-color: rgb(var(--greenlight));
+}
+
+.btn-white {
+    transition: all 0.1s ease-in-out;
+    background-color: white;
+    color: rgb(var(--green));
+    border: 2px solid rgb(var(--green));
+   }
+.btn-white1 {
+    transition: all 0.1s ease-in-out;
+    background-color: white;
+    color: rgb(var(--greenlight));
+    border: 2px solid rgb(var(--greenlight));
+}
+.btn-whiteRED {
+    transition: all 0.1s ease-in-out;
+    background-color: white;
+    color: rgb(var(--red));
+    border: 2px solid rgb(var(--red));
+}
+
+.btn-yellow {
+    width: fit-content;
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(var(--yellow));
+    color: black
+}
+
+.btn-red {
+    width: fit-content;
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(var(--red));
+    color: white
+}
+
+.btn-yellow:hover {
+    background-color: rgb(var(--yellowlight));
+}
+.btn-green:hover {
+    background-color: rgb(var(--greenTransition));
+}
+.btn-green-light:hover {
+    background-color: rgb(var(--greenTransition));
+}
+.btn-white:hover {
+    background-color: rgb(var(--greenTransition));
+    color: white;
+    border-color: rgb(var(--greenTransition));
+}
+.btn-white1:hover {
+    background-color: rgb(var(--greenTransition));
+    color: white;
+    border-color: rgb(var(--greenTransition));
+}
+.btn-whiteRED:hover {
+    background-color: rgb(var(--redlight));
+    color: white;
+    border-color: rgb(var(--redlight));
+}
+
+.btn-red:hover {
+    background-color: rgb(var(--redlight));
+    color: white;
+    border-color: rgb(var(--redlight));
+}
+
+
+.btn-green {
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(var(--green));
+    color: white
+}
+
+
+
+.bg-image-home {
+    background-image: url("/image/Vector.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-attachment: fixed;
+}
