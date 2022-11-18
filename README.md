@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# Recicle++ Coletor App
+# Recicle++ Instituição WebApp
 
 Recicle++ is a project created with React, Expo and TypeScript to help recycling donors to match recycling pickers.
 
