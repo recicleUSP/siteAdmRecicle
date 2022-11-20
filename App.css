@@ -5,17 +5,15 @@
 
 :root {
     --background: 201 211 219;
-    --background-light: 245 245 245;
+    --backgroundLight: 245 245 245;
     --yellow: 252 185 78;
-    --yellowlight:245 214 124;
+    --yellowLight:245 214 124;
     --green: 3 86 48;
     --greenTransition:113 208 170;
     --greenlight:0 202 128;
     --cinza-title:195 189 189;
     --red:244 77 78;
-    --redlight: 243 110 110;
-
-    
+    --redLight: 243 110 110;
 }
 
 .btn {

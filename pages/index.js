@@ -7,7 +7,7 @@ const NavBar = () => {
     ]
 
     return (
-        <div className="flex justify-between py-5 items-center ">
+        <div className="flex justify-between py-5 items-center">
             <div className="h-full z-10">
                 <Image width={296*0.7} height={58*0.7} priority src={"/image/logo.png"} alt="Logo Recicle++"/>
             </div>

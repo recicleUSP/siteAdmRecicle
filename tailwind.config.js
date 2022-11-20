@@ -12,21 +12,21 @@ module.exports = {
       colors: {
         background: {
             DEFAULT: 'rgb(var(--background)/<alpha-value>)',
-            light: 'rgb(var(--background-light)/<alpha-value>)',
+            light: 'rgb(var(--backgroundLight)/<alpha-value>)',
             instituicao: 'rgb(var(--background-instituicao)/<alpha-value>)',
         },
         red :{
             DEFAULT: 'rgb(var(--red)/<alpha-value>)',
-            light: 'rgb(var(--redlight)/<alpha-value>)',
+            light: 'rgb(var(--redLight)/<alpha-value>)',
         },
         green: {
             DEFAULT: 'rgb(var(--green)/<alpha-value>)',
-            light: 'rgb(var(--greenlight)/<alpha-value>)',
+            light: 'rgb(var(--greenLight)/<alpha-value>)',
             transition: 'rgb(var(--greenTransition)/<alpha-value>)',
         },
-        yeallow: {
-            DEFAULT: 'rgb(var(--yeallow)/<alpha-value>)',
-            light: 'rgb(var(--yeallowlight)/<alpha-value>)',
+        yellow: {
+            DEFAULT: 'rgb(var(--yellow)/<alpha-value>)',
+            light: 'rgb(var(--yellowLight)/<alpha-value>)',
         },
         'cinza-fonte-table': 'rgb(var(--cinza-fonte)/<alpha-value>)',
         'verde-padrao': '#035630',
