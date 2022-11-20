@@ -74,9 +74,5 @@ Ex: `git commit -m "Feature(banner-parallax): Added the parallax effect to the b
 
 ## Development Team
 
-- **Fred Xavier** - _Tech Leader and Front-end Dev_ - [fredxc](https://github.com/fredxc)
-- **Vitor Laperriere** - _Front-end Dev_ - [vitorlape](https://github.com/vitorlape)
-
-<p align="right">
-  Made with <b><i>markdown</i></b> and <b><i><3</i></b> by <a href="https://github.com/fredxc">Fred Xavier</a>
-</p>
+- **Heitor Tanoue** - _Front-end & Back-End Dev_ - [totoi690](https://github.com/totoi690)
+- **Beatriz Lomes** - _Front-end & Back-End Dev_ - [bealomes](https://github.com/bealomes)
