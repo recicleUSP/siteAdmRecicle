@@ -9,7 +9,7 @@ export interface Institution {
 		cep: string
 		state_inscription: number
 	},
-	manager_id: string,
+    pickers_count: number,
 }
 
 export interface Picker {
@@ -33,5 +33,5 @@ export interface Manager {
 	cpf: string,
 	email: string,
 	phone: string,
-	institution_id: string
+	institution_id?: any
 }

@@ -10,10 +10,9 @@ export default function cadastrarInstituicao() {
                 <DadosInstituicao type="cadastrar"/>
                
             </div>
-            <div className="absolute bottom-0 left-0 hidden lg:block">
+            {/* <div className="absolute bottom-0 left-0 hidden lg:block">
                 <Image src="/image/cuidandomundo.svg" width={400} height={400} priority/>
-            </div>
+            </div> */}
         </div>
     )
-
 }

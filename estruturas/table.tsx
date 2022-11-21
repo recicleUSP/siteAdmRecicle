@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import PopUp from './popUp'
 import Link from "next/link"
+import { deleteDoc } from "firebase/firestore"
 
 interface HeadObj {
     title: string,
@@ -54,7 +55,7 @@ const Picker = ({ type, value, popUp, page }) => {
 
 
 
-export default function defTable ({ head, obj , page} : { head: HeadObj[], obj: Obj[], page: string }) {
+export default function defTable ({ head, obj , page } : { head: HeadObj[], obj: Obj[], page: string }) {
     const [showPopUp, setShowPopUp] = useState(false)
 
     return (

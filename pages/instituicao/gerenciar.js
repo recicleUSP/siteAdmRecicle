@@ -2,9 +2,25 @@ import Image from "next/image"
 import Link from "next/link"
 import Header from "../../estruturas/header.tsx"
 import Table from "../../estruturas/table"
+import { database } from "../../utils/firebaseConfig"
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 
-export default function loginInstituicao() {
+export async function getServerSideProps() {
+    // Fetch data from external API
+    const col = collection(database, 'institutions')
+    const q = query(col)
+    const querySnapshot = await getDocs(q)
+    const institutions = []       
+    querySnapshot.forEach((doc) => {
+        institutions.push(doc.data())
+    });
+      
+    return { props: { institutions } }
+  }
+  
+
+export default function loginInstituicao({ institutions }) {
     const tableHead = [
         {title: "Nome da instituição", key: "nome", type: "text"},
         {title: "Coletores gerenciados", key: "coletores", type: "text"},
@@ -16,6 +32,21 @@ export default function loginInstituicao() {
         {nome: "Maria", coletores: "15"},
         {nome: "Pedro", coletores: "4"},
     ]
+
+    const institutionsFormatted = institutions.map(el => {
+        return {
+            nome: el.name,
+            coletores: el.pickers_count,
+            acoes: {
+                edit: {
+                    path: "/instituicao/gerenciar",
+                    params: {
+                        id: el.id
+                    }
+                }
+            }
+        }
+    })
 
     return (
     <div>
@@ -52,7 +83,7 @@ export default function loginInstituicao() {
                    
 
                 </div>
-                <Table head={tableHead} page="Instituicao" obj={tableObj}/>
+                <Table head={tableHead} page="Instituicao" obj={institutionsFormatted}/>
             </div>
         </div>    
     </div>

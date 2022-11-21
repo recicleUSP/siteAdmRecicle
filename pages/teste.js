@@ -5,8 +5,8 @@ export default function Teste () {
     const col = collection(database, 'teste')
     const saveToDb = async () => {
         await addDoc(col, {
-            nome: 'teste',
-            numero: 230
+            nome: 'teste123',
+            numero: 233123
         })
     }
 
