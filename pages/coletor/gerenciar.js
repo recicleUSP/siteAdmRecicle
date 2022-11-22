@@ -1,8 +1,22 @@
 import Link from "next/link"
 import Header from "../../estruturas/header.tsx"
 import Table from "../../estruturas/table"
+import { database } from "../../utils/firebaseConfig"
+import { collection, getDocs, query, where } from "firebase/firestore";
 
-export default function loginInstituicao() {
+export async function getServerSideProps() {    
+    // Fetch data from external API
+    const col = collection(database, 'picker')
+    const q = query(col)
+    const querySnapshot = await getDocs(q)
+    const picker = []
+    querySnapshot.forEach((doc) => {
+        picker.push(doc.data())
+    });
+    return { props: { picker } }
+}
+
+export default function loginInstituicao({ picker }) {
     const tableHead = [
         {title: "Nome do coletor", key: "nome", type: "text"},
         {title: "Coletas realizada", key: "coletas", type: "text"},
@@ -10,11 +24,22 @@ export default function loginInstituicao() {
         {title: "", key: "acoes", type: "actions"},
     ]
 
-    const tableObj = [
-        {nome: "João", coletas: "10", avaliacao: 4},
-        {nome: "Maria", coletas: "15", avaliacao: 1.2},
-        {nome: "Pedro", coletas: "4", avaliacao: 3.2},
-    ]
+    const pickersFormatted = picker.map(el => {
+        return {
+            nome: el.name,
+            coletas: el.pickers_count,
+            avaliacao: el.rating,
+            acoes: {
+                edit: {
+                    path: "/coletor/gerenciar",
+                    params: {
+                        id: el.id
+                    }
+                }
+            }
+        }   
+    })
+   
 
     return(
     <div className={"bg-background h-screen w-full overflow-hidden relative"}> 
@@ -25,7 +50,7 @@ export default function loginInstituicao() {
                     <div>
                         <h1 className="font-sans text-lg font-bold">Gerenciamento de Coletores</h1>
                     </div>
-                    <Link  rel="stylesheet" href="/Coletor/cadastrar" passHref>
+                    <Link  rel="stylesheet" href="/coletor/cadastrar" passHref>
                         <button className="btn btn-green-light !px-14 !py-2.5">
                             <p className="text-xs font-Inter font-medium ">Cadastrar Coletor</p>
                         </button>
@@ -49,7 +74,7 @@ export default function loginInstituicao() {
                         </div>
                     </div>
                 </div>
-                <Table head={tableHead} page="Coletor" obj={tableObj}/>
+                <Table head={tableHead} page="coletor" obj={pickersFormatted}/>
             </div>
         </div>    
 

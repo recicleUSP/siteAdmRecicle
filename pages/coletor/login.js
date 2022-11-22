@@ -41,7 +41,7 @@ export default function loginInstituicao() {
                                     </Link>
                                 </div>
                                 <div className="btn btn-green w-full">
-                                    <Link rel="stylesheet" href="/Coletor/gerenciar" passHref>
+                                    <Link rel="stylesheet" href="/coletor/gerenciar" passHref>
                                         <button type="button"  className="w-full">Entrar</button>
                                     </Link>
                                 </div>

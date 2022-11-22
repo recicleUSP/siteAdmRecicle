@@ -27,12 +27,6 @@ export default function loginInstituicao({ institutions }) {
         {title: "", key: "acoes", type: "actions"},
     ]
 
-    const tableObj = [
-        {nome: "João", coletores: "5"},
-        {nome: "Maria", coletores: "15"},
-        {nome: "Pedro", coletores: "4"},
-    ]
-
     const institutionsFormatted = institutions.map(el => {
         return {
             nome: el.name,
@@ -58,7 +52,7 @@ export default function loginInstituicao({ institutions }) {
                     <div>
                         <h1 className="font-sans text-lg font-bold">Gerenciamento de Instituições</h1>
                     </div>
-                    <Link  rel="stylesheet" href="/Instituicao/cadastrar" passHref>
+                    <Link  rel="stylesheet" href="/instituicao/cadastrar" passHref>
                         <button className="btn btn-green-light !px-14 !py-2.5 ">
                             <p className="text-xxs font-Inter font-medium ">Cadastrar Instituição</p>
                         </button>
@@ -83,7 +77,7 @@ export default function loginInstituicao({ institutions }) {
                    
 
                 </div>
-                <Table head={tableHead} page="Instituicao" obj={institutionsFormatted}/>
+                <Table head={tableHead} page="instituicao" obj={institutionsFormatted}/>
             </div>
         </div>    
     </div>

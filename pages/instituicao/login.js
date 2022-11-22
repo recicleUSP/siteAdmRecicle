@@ -43,7 +43,7 @@ export default function loginAdm() {
                                         </Link>
                                     </div>
                                     <div className="btn btn-green w-full">
-                                        <Link rel="stylesheet" href="/Instituicao/gerenciar" passHref>
+                                        <Link rel="stylesheet" href="/instituicao/gerenciar" passHref>
                                             <button type="button"  className="w-full">Entrar</button>
                                         </Link>
                                     </div>
