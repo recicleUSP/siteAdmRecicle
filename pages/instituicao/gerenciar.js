@@ -68,7 +68,7 @@ export default function loginInstituicao({ institutions }) {
                 <div className="flex justify-between py-5">
                     <div className="flex justify-between bg-background-light  px-4 rounded-md">
                         <div className="px-2 text-cinza-fonte text-sm py-2">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <input className="inputPesquisa outline-none text-xs font-medium  border-background-light bg-background-light placeholder:text-cinza-fonte" type="text" placeholder="Buscar Instituição"/>
                     </div>
