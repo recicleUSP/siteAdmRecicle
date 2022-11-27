@@ -21,6 +21,8 @@ export interface Picker {
 	rg: string,
 	phone: string,
 	phonealt?: string,
+	pickers_count: number,
+	rating: number,
 	address: {
 		street: string,
 		street_number: number,

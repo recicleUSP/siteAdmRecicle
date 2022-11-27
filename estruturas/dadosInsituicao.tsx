@@ -1,5 +1,6 @@
 import React from "react";
 import InputModel from "./inputModel";
+import Link from "next/link"
 import { FormProvider, useForm } from "react-hook-form";
 import { Institution, Manager } from "../utils/types/users"
 import { addDoc, collection, doc } from "firebase/firestore";
@@ -122,11 +123,11 @@ export default function DadosInstituicao({ type }: { type: string }) {
                         <InputModel title="TELEFONE" type="text" name="manager_phone" placeholder={"(XX) XXXXX-XXXX"} required/>
                     </div>
                     <div className="flex justify-end gap-4 mt-5">
-                        {/* <Link rel="stylesheet" href="/Instituicao/gerenciar" passHref> */}
+                        <Link rel="stylesheet" href="/instituicao/gerenciar" passHref> 
                             <button type="submit" className={`btn ${buttonType} !px-10 cursor-pointer !py-2.5 !rounded-lg`}>
                                 {buttonText}
                             </button>
-                        {/* </Link> */}
+                         </Link> 
                         
                         {/* <Link rel="stylesheet" href="/Instituicao/gerenciar" passHref> */}
                             <button type="submit" className="btn btn-green-light !px-10 cursor-pointer !py-2.5 !rounded-lg">
