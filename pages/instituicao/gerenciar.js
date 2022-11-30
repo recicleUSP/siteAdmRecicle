@@ -3,8 +3,7 @@ import Link from "next/link"
 import Header from "../../estruturas/header.tsx"
 import Table from "../../estruturas/table"
 import { database } from "../../utils/firebaseConfig"
-import { collection, getDocs, query, where } from "firebase/firestore";
-
+import { collection, getDocs, query } from "firebase/firestore";
 
 export async function getServerSideProps() {
     // Fetch data from external API
@@ -43,7 +42,7 @@ export default function loginInstituicao({ institutions }) {
                     }
                 },
                 remove: {
-                    path: "/instituicao/remover",
+                    path: "/instituicao/deletar",
                     params: {
                         id: el.id
                     }
@@ -53,7 +52,7 @@ export default function loginInstituicao({ institutions }) {
     })
 
     return (
-    <div>
+    <>
     <div className={"bg-background-light h-screen w-full overflow-hidden relative"}> 
         <div className="container px-6 mx-auto max-w-normal h-full">
             <Header  type="instituicao" />
@@ -87,10 +86,14 @@ export default function loginInstituicao({ institutions }) {
                    
 
                 </div>
-                <Table head={tableHead} page="instituicao" obj={institutionsFormatted}/>
+                <Table 
+                    head={tableHead}
+                    page="instituicao"
+                    obj={institutionsFormatted}
+                />
             </div>
         </div>    
     </div>
-    </div>
+    </>
     )
 }

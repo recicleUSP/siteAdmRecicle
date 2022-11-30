@@ -99,9 +99,9 @@
 }
 
 .btn-red:hover {
-    background-color: rgb(var(--redlight));
+    background-color: rgb(var(--redLight));
     color: white;
-    border-color: rgb(var(--redlight));
+    border-color: rgb(var(--redLight));
 }
 
 

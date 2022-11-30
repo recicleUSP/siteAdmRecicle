@@ -1,5 +1,5 @@
 import { formatObjectAsInstitution, removeEmptyFields } from "./formUtils";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { database } from "../utils/firebaseConfig";
 import { Institution, Manager } from "./types/users";
 
@@ -24,4 +24,10 @@ export async function editInstitution (data: any, id: string) : Promise<void> {
     const colInstitutions = collection(database, "institutions");
     const docInstitution = doc(colInstitutions, id);
     updateDoc(docInstitution, data);
+}
+
+export async function deleteInstitution (id: string) : Promise<void> {
+    const colInstitutions = collection(database, "institutions");
+    const docInstitution = doc(colInstitutions, id);
+    deleteDoc(docInstitution);
 }

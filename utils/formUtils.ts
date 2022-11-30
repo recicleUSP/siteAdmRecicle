@@ -28,6 +28,10 @@ export function getNewFields (obj1, obj2) : Object {
     return newObj;
 }
 
+export function getQueriesFromObject (obj : Object) : string {
+    return "?" + Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
+}
+
 export function formatObjectAsInstitution (obj) : Institution {
     return {
         name: obj.name,

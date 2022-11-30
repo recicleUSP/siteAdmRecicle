@@ -3,6 +3,7 @@ import { useState } from 'react'
 import PopUp from './popUp'
 import Link from "next/link"
 import { deleteDoc } from "firebase/firestore"
+import { getQueriesFromObject } from '../utils/formUtils'
 
 interface HeadObj {
     title: string,
@@ -27,8 +28,10 @@ const Acoes = ({ setShowPopUp, config }) => {
     const { edit, remove } = config
     const editURL = edit ? edit.path : "/"
     const editParams = edit ? edit.params : {}
-    const editQueries = Object.keys(editParams).length > 0 ? "?" + Object.keys(editParams).map(key => `${key}=${editParams[key]}`).join("&") : ""
-
+    const editQueries = getQueriesFromObject(editParams)
+    const removeURL = remove ? remove.path : "/"
+    const removeParams = remove ? remove.params : {}
+    const removeQueries = getQueriesFromObject(removeParams)
 
     return (
         <div className="flex gap-2 justify-end text-white">
@@ -37,21 +40,22 @@ const Acoes = ({ setShowPopUp, config }) => {
                     <i className="fa-solid fa-pencil m-auto"/>                
                 </div>
             </Link>
-            <div className="bg-red flex rounded-md hover:bg-red-light cursor-pointer w-7 h-7 border transition-all "  onClick={() => setShowPopUp(true)}>
-                <i className="fa-solid fa-trash m-auto"/>                
-            </div>
+            <Link rel="stylesheet" href={removeURL + removeQueries}>
+                <div className="bg-red flex rounded-md hover:bg-red-light cursor-pointer w-7 h-7 border transition-all ">
+                    <i className="fa-solid fa-trash m-auto"/>                
+                </div>
+            </Link>
         </div>
     )
 
 }
 
-const Picker = ({ type, value, popUp, page }) => {
-    const { showPopUp, setShowPopUp } = popUp
+const Picker = ({ type, value, page }) => {
     switch(type) {
         case 'stars':
             return <Star stars={value}/>
         case 'actions':
-            return <Acoes config={value} setShowPopUp={setShowPopUp}/>
+            return <Acoes config={value}/>
         default:
             return <div>{value}</div>
     }
@@ -59,26 +63,11 @@ const Picker = ({ type, value, popUp, page }) => {
 
 
 
-export default function defTable ({ head, obj , page } : { head: HeadObj[], obj: Obj[], page: string }) {
-    const [showPopUp, setShowPopUp] = useState(false)
+export default function defTable ({ head, obj, page } : 
+    { head: HeadObj[], obj: Obj[], page: string }) {
 
     return (
         <>
-            <PopUp show={showPopUp} setShow={setShowPopUp}>
-                    <div className=" text-center">
-                        <p className="text-xl font-semibold tracking-tight ">REMOVER O CADASTRO DA INSTITUIÇÃO nome_da_instituição?</p>
-                        <p className="py-6 px-10 text-xxs">Essa ação não poderá ser revertida, tem certeza que deseja excluir?</p>
-
-                    </div>
-                    <div className="flex justify-center  gap-4 ">
-                        <button className=" btn btn-red  !px-10 !py-2.5 " onClick={() => setShowPopUp(false)}>
-                            <p className="font-semibold text-xxs">Cancelar</p>
-                        </button>
-                        <button className="btn btn-green-light !px-10 !py-2.5">
-                            <p className="font-semibold text-xxs">Excluir</p>
-                        </button>
-                    </div>   
-            </PopUp>
         <table className="table-auto w-full text-sm">
             <thead>
                 <tr >
@@ -100,7 +89,7 @@ export default function defTable ({ head, obj , page } : { head: HeadObj[], obj:
                                     {
                                         head.map((headItem : HeadObj, headIndex) => (
                                             <td key={headIndex} className={`px-4 text-sm font-semibold py-2 ${ isColored ? "bg-gray-100" : "bg-white"}`}>
-                                                <Picker page={page} type={headItem.type} value={item[headItem.key]} popUp={{showPopUp, setShowPopUp}}/>
+                                                <Picker page={page} type={headItem.type} value={item[headItem.key]}/>
                                             </td>
                                         ))
                                     }
