@@ -23,15 +23,19 @@ const Star = ({ stars }) => {
         </div>
     )
 }
-const Acoes = ({ setShowPopUp, page }) => {
+const Acoes = ({ setShowPopUp, config }) => {
+    const { edit, remove } = config
+    const editURL = edit ? edit.path : "/"
+    const editParams = edit ? edit.params : {}
+    const editQueries = Object.keys(editParams).length > 0 ? "?" + Object.keys(editParams).map(key => `${key}=${editParams[key]}`).join("&") : ""
+
+
     return (
         <div className="flex gap-2 justify-end text-white">
-            <Link rel="stylesheet" href={`/${page}/editardados`}>
-            
-            
-            <div className="bg-emerald-700 flex hover:bg-green-transition rounded-md cursor-pointer w-7 h-7 border transition-all">
-                <i className="fa-solid fa-pencil m-auto"/>                
-            </div>
+            <Link rel="stylesheet" href={editURL + editQueries}>
+                <div className="bg-emerald-700 flex hover:bg-green-transition rounded-md cursor-pointer w-7 h-7 border transition-all">
+                    <i className="fa-solid fa-pencil m-auto"/>                
+                </div>
             </Link>
             <div className="bg-red flex rounded-md hover:bg-red-light cursor-pointer w-7 h-7 border transition-all "  onClick={() => setShowPopUp(true)}>
                 <i className="fa-solid fa-trash m-auto"/>                
@@ -47,7 +51,7 @@ const Picker = ({ type, value, popUp, page }) => {
         case 'stars':
             return <Star stars={value}/>
         case 'actions':
-            return <Acoes page={page} setShowPopUp={setShowPopUp}/>
+            return <Acoes config={value} setShowPopUp={setShowPopUp}/>
         default:
             return <div>{value}</div>
     }
@@ -73,9 +77,7 @@ export default function defTable ({ head, obj , page } : { head: HeadObj[], obj:
                         <button className="btn btn-green-light !px-10 !py-2.5">
                             <p className="font-semibold text-xxs">Excluir</p>
                         </button>
-                    </div>
-
-                
+                    </div>   
             </PopUp>
         <table className="table-auto w-full text-sm">
             <thead>

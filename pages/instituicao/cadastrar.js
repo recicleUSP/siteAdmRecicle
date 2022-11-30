@@ -1,13 +1,13 @@
 import Image from "next/image"   
 import Header from "../../estruturas/header"
-import DadosInstituicao from "../../estruturas/dadosInsituicao"
+import DadosInstituicao from "../../estruturas/dadosInstituicao"
 
 export default function cadastrarInstituicao() {
     return(
         <div className={"bg-background-light h-screen w-full overflow-hidden relative"}> 
             <div className="container lg:px-6 px-2 mx-auto max-w-normal h-full">
                 <Header />
-                <DadosInstituicao type="cadastrar"/>
+                <DadosInstituicao type="cadastro"/>
                
             </div>
             {/* <div className="absolute bottom-0 left-0 hidden lg:block">

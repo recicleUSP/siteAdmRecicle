@@ -93,9 +93,9 @@
     border-color: rgb(var(--greenTransition));
 }
 .btn-whiteRED:hover {
-    background-color: rgb(var(--redlight));
+    background-color: rgb(var(--red));
     color: white;
-    border-color: rgb(var(--redlight));
+    border-color: rgb(var(--red));
 }
 
 .btn-red:hover {

@@ -13,7 +13,11 @@ export async function getServerSideProps() {
     const querySnapshot = await getDocs(q)
     const institutions = []       
     querySnapshot.forEach((doc) => {
-        institutions.push(doc.data())
+        const newObj = {
+            id: doc.id,
+            ...doc.data()
+        }
+        institutions.push(newObj)
     });
       
     return { props: { institutions } }
@@ -33,7 +37,13 @@ export default function loginInstituicao({ institutions }) {
             coletores: el.pickers_count,
             acoes: {
                 edit: {
-                    path: "/instituicao/gerenciar",
+                    path: "/instituicao/editardados",
+                    params: {
+                        id: el.id
+                    }
+                },
+                remove: {
+                    path: "/instituicao/remover",
                     params: {
                         id: el.id
                     }
