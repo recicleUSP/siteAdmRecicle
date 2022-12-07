@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { removeEmptyFields, getNewFields, formatObjectAsInstitution } from "../utils/formUtils"
 import { createInstitution, editInstitution } from "../utils/firebaseFunctions";
 import { useRouter } from "next/router";
+import ErrorSucessBox from "./gerais/errorSucessBox";
 
 interface FormData {
     title: string,
@@ -104,6 +105,9 @@ export default function DadosInstituicao({ type, defaultData }: { type: string, 
                     </div>
                 </>
                 : null }
+                {true ?
+                    <ErrorSucessBox type="sucesso" message="Essa é uma mensagem de sucesso!"/>
+                : null}
                     <div className="flex justify-end gap-4 mt-5">
                         <Link rel="stylesheet" href="/instituicao/gerenciar" passHref> 
                             <button className={`btn btn-white1 !px-8 cursor-pointer !py-2 text-sm font-bold !rounded-lg`}>
