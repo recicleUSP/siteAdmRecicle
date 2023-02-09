@@ -11,7 +11,11 @@ export async function getServerSideProps() {
     const querySnapshot = await getDocs(q)
     const picker = []
     querySnapshot.forEach((doc) => {
-        picker.push(doc.data())
+        const newObj = {
+            id: doc.id,
+            ...doc.data()
+        }
+        picker.push(newObj)
     });
     return { props: { picker } }
 }
@@ -31,7 +35,13 @@ export default function loginInstituicao({ picker }) {
             avaliacao: el.rating,
             acoes: {
                 edit: {
-                    path: "/coletor/gerenciar",
+                    path: "/coletor/editardados",
+                    params: {
+                        id: el.id
+                    }
+                },
+                remove: {
+                    path: "/coletor/deletar",
                     params: {
                         id: el.id
                     }

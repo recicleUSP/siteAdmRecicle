@@ -36,6 +36,13 @@ export default function loginAdm() {
                                     <input type="checkbox" className="border border-verde-padrao" name="ManterCanectado" id="" />
                                     <p className="px-1 text-sm">Mantenha-me conectado</p>
                                 </div>
+                                <div className="flex justify-center cursor-pointer py-3">
+                                    <Link rel="stylesheet" href="/instituicao/cadastrar" passHref>
+                                        <p className="px-1 text-verde-padrao  text-xs">Não é cadastrado? Criar conta</p>
+                                    </Link>
+
+                                </div>
+
                                 <div className="flex place-content-center justify-between px-8 py-4 ">
                                     <div className="btn btn-white w-full border mr-8 border-solid border-verde-padrao bold ">
                                         <Link rel="stylesheet" href="/" passHref>

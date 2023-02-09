@@ -1,4 +1,4 @@
-import { Institution } from "./types/users";
+import { Institution, Picker } from "./types/users";
 import { isEqual } from "lodash";
 
 export function removeEmptyFields(data : Object) : Object {
@@ -38,6 +38,7 @@ export function formatObjectAsInstitution (obj) : Institution {
         email: obj.email,
         phone: obj.phone,
         cnpj: obj.cnpj,
+        password: obj.password,
         address: {
             street: obj.street,
             street_number: obj.street_number,
@@ -45,5 +46,26 @@ export function formatObjectAsInstitution (obj) : Institution {
             state_inscription: obj.state_inscription
         },
         pickers_count: obj.pickers_count || 0,
+    }
+}
+
+export function formatObjectAsPicker (obj, idInstitution) : Picker {
+    return{
+        institution_id: idInstitution,
+        name: obj.name,
+        email: obj.email,
+        phone: obj.phone,
+        phonealt: obj.phonealt,
+        password: obj.password,
+        cpf: obj.cpf,
+        rg: obj.rg,
+        birthday: obj.birthday,
+        pickers_count: obj.pickers_count || 0,
+        rating: obj.rating || 0,
+        address: {
+            street: obj.street,
+            street_number: obj.street_number,
+            cep: obj.cep,
+        },
     }
 }

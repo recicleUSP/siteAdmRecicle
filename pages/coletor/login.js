@@ -1,7 +1,27 @@
-import Image from "next/image"   
+import Image from "next/image" 
+import { useState } from "react";  
 import Link from "next/link"
+import {auth} from "../../utils/firebaseConfig";
+import {useSignInWithEmailAndPassword} from "react-firebase-hooks/auth"
 
 export default function loginInstituicao() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+  function handleSignIn(e) {
+    e.preventDefault();
+    signInWithEmailAndPassword(email, password);
+  }
+
+  if (loading) {
+    return <p>carregando...</p>;
+  }
+  if (user) {
+    return console.log(user);
+  }
+
     return(
         <div className="h-screen w-full overflow-hidden relative">
         <div className="flex flex-row h-screen justify-between ">
@@ -18,11 +38,11 @@ export default function loginInstituicao() {
                         <div className="py-2 ">
                             <div>
                                 <p className="text-sm">E-mail</p>
-                                <input className="w-full text-lg mt-1  border-solid border rounded-input border-verde-padrao" type="email" />
+                                <input className="w-full text-lg mt-1  border-solid border rounded-input border-verde-padrao" onChange={(e) => setEmail(e.target.value)} type="email" />
                             </div>
                             <div className="mt-4">
                                 <p className="text-sm">Senha</p>
-                                <input className="w-full text-lg mt-1 border-solid border rounded-input border-verde-padrao" type="password" />
+                                <input className="w-full text-lg mt-1 border-solid border rounded-input border-verde-padrao" onChange={(e) => setPassword(e.target.value)} type="password" />
                             </div>
                             <div className="flex justify-between">
                                 <div></div>
@@ -42,7 +62,7 @@ export default function loginInstituicao() {
                                 </div>
                                 <div className="btn btn-green w-full">
                                     <Link rel="stylesheet" href="/coletor/gerenciar" passHref>
-                                        <button type="button"  className="w-full">Entrar</button>
+                                        <button type="button" onClick={handleSignIn}   className="w-full">Entrar</button>
                                     </Link>
                                 </div>
                             </div>

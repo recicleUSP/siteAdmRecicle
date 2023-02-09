@@ -13,6 +13,21 @@ interface FormData {
     submitFunction?: any
 }
 
+
+function verifyPassword(password, passwordConfirm) {
+    if (password !== passwordConfirm) {
+        return false;
+    }
+    return true;
+}
+ /* 
+const alertPassword = () => {
+    if(!verifyPassword(password, passwordConfirm)){
+        alert("As senhas não conferem")
+    }
+}
+*/
+
 const setarValores = (type, defData, id) : FormData => {
     const cadastrar = async (values, e) => {
         e.preventDefault()
@@ -82,7 +97,11 @@ export default function DadosInstituicao({ type, defaultData }: { type: string, 
                             <InputModel defaultValue={previousData.address.street} title="LOGRADOURO" type="text"  name="street"/>
                         </div>
                         <InputModel defaultValue={previousData.address.street_number} title="Nº" type="text" name="street_number"/>                                
-                    </div>                            
+                    </div>  
+                    <div className="grid grid-cols-2 gap-2 mt-4">
+                        <InputModel title="Senha" type="password" name="password" required/>
+                        <InputModel title="Confirmar senha" type="password" name="passwordConfirm" required/>
+                    </div>
                 </div>
                 { type === 'cadastro' ? 
                 <>
@@ -102,7 +121,7 @@ export default function DadosInstituicao({ type, defaultData }: { type: string, 
                             <InputModel title="TELEFONE" type="text" name="manager_phone" placeholder={"(XX) XXXXX-XXXX"} required/>
                         </div>
                     </div>
-                </>
+                </> 
                 : null }
                     <div className="flex justify-end gap-4 mt-5">
                         <Link rel="stylesheet" href="/instituicao/gerenciar" passHref> 
@@ -122,3 +141,4 @@ export default function DadosInstituicao({ type, defaultData }: { type: string, 
         </div>
     )
 }	
+

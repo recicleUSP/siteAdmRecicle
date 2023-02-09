@@ -3,6 +3,7 @@ export interface Institution {
 	email: string,
 	phone: string,
 	cnpj: string,
+	password: string,
 	address: {
 		street: string,
 		street_number: number,
@@ -19,6 +20,7 @@ export interface Picker {
 	birthday: Date,
 	cpf: string,
 	rg: string,
+	password: string,
 	phone: string,
 	phonealt?: string,
 	pickers_count: number,
