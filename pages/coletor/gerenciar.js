@@ -4,8 +4,9 @@ import Table from "../../estruturas/table"
 import { database } from "../../utils/firebaseConfig"
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-export async function getServerSideProps() {    
+export async function getServerSideProps(context) {    
     // Fetch data from external API
+    const user = JSON.parse(context.query.user);
     const col = collection(database, 'picker')
     const q = query(col)
     const querySnapshot = await getDocs(q)
@@ -17,10 +18,13 @@ export async function getServerSideProps() {
         }
         picker.push(newObj)
     });
-    return { props: { picker } }
+    return { props: { picker, user } }
 }
 
-export default function loginInstituicao({ picker }) {
+export default function LoginInstituicao({ picker, user }) {
+
+    console.log(user);
+
     const tableHead = [
         {title: "Nome do coletor", key: "nome", type: "text"},
         {title: "Coletas realizada", key: "coletas", type: "text"},

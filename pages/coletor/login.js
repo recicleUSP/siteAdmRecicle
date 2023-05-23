@@ -1,25 +1,30 @@
 import Image from "next/image" 
 import { useState } from "react";  
 import Link from "next/link"
-import {auth} from "../../utils/firebaseConfig";
-import {useSignInWithEmailAndPassword} from "react-firebase-hooks/auth"
+import { useRouter } from 'next/router'
+import { auth } from "../../utils/firebaseConfig";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
+import {signInWithEmailAndPassword} from "firebase/auth";
 
-export default function loginInstituicao() {
+export default function LoginInstituicao() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
-
-  function handleSignIn(e) {
+  async function handleSignIn(e) {
     e.preventDefault();
-    signInWithEmailAndPassword(email, password);
-  }
-
-  if (loading) {
-    return <p>carregando...</p>;
-  }
-  if (user) {
-    return console.log(user);
+    await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => { 
+        if (userCredential) {
+            router.push({
+                pathname: '/coletor/gerenciar',
+                query: { 
+                    user: JSON.stringify(userCredential.user),
+                },
+            },
+            '/coletor/gerenciar')
+        }   
+    });
   }
 
     return(
@@ -61,9 +66,7 @@ export default function loginInstituicao() {
                                     </Link>
                                 </div>
                                 <div className="btn btn-green w-full">
-                                    <Link rel="stylesheet" href="/coletor/gerenciar" passHref>
-                                        <button type="button" onClick={handleSignIn}   className="w-full">Entrar</button>
-                                    </Link>
+                                    <button type="button" onClick={handleSignIn}   className="w-full">Entrar</button>
                                 </div>
                             </div>
 

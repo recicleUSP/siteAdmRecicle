@@ -23,7 +23,7 @@ export async function getServerSideProps() {
   }
   
 
-export default function loginInstituicao({ institutions }) {
+export default function LoginInstituicao({ institutions }) {
     const tableHead = [
         {title: "Nome da instituição", key: "nome", type: "text"},
         {title: "Coletores gerenciados", key: "coletores", type: "text"},
