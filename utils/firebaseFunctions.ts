@@ -1,10 +1,48 @@
-import { formatObjectAsInstitution, formatObjectAsPicker, removeEmptyFields } from "./formUtils";
+import { formatObjectAsInstitution, formatObjectAsManager, formatObjectAsPicker, removeEmptyFields } from "./formUtils";
 import { addDoc, setDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { database } from "../utils/firebaseConfig";
 import { Institution, Manager, Picker } from "./types/users";
 
+export async function createManager (password: string, data : any) : Promise<void> {
+    console.log("data " + data);
+    const manager : Manager = formatObjectAsManager(data);
+    console.log("manager " + manager);
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, manager.email, password)
+      .then((managerCredential) => {
+        // Signed in 
+        const managerId = managerCredential.user.uid;   
+        const docRef = doc(database, "manager", managerId);
+        
+        setDoc(docRef, manager)
+        .then(docRef => {
+            console.log(`Document has been added successfully`)
+        })
+        .catch((error) => {
+            console.log(error.code+": "+error.message);
+        });
+      })
+      .catch((error) => {
+        console.log(error.code+": "+error.message);
+      });
+} 
+
+
 //Institution functions
+export async function createInstitution (data : any) : Promise<void> {
+  const institution : Institution = formatObjectAsInstitution(data);
+
+  const docRef = collection(database, "institutions");
+      
+  addDoc(docRef, institution)
+  .catch((error) => {
+      console.log(error.code+": "+error.message);
+  });
+} 
+
+/*
 export async function createInstitution (data : any) : Promise<void> {
     const institution : Institution = formatObjectAsInstitution(data);
 
@@ -19,22 +57,13 @@ export async function createInstitution (data : any) : Promise<void> {
         .catch((error) => {
             console.log(error.code+": "+error.message);
         });
-        /*
-        const manager : Manager = {
-            name: data.manager_name,
-            email: data.manager_email,
-            phone: data.manager_phone,
-            cpf: data.manager_cpf,
-            institution_id: idInstitution
-        }
-        const colManagers = collection(database, "managers");
-        await addDoc(colManagers, manager);
-        */
+
       })
       .catch((error) => {
         console.log(error.code+": "+error.message);
       });
 } 
+*/
 
 export async function editInstitution (data: any, id: string) : Promise<void> {
     const colInstitutions = collection(database, "institutions");

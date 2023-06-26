@@ -2,8 +2,8 @@ import Image from "next/image"
 
 const NavBar = () => {
     const pages = [
-        { name: "ADMINISTRAÇÃO", path: "/instituicao/login", icon: "users" },
-        { name: "INTITUIÇÕES", path: "/coletor/login", icon: "building" },
+        { name: "ENTRAR", path: "/auth/login", icon: "users" },
+        { name: "CADASTRAR", path: "/manager/cadastrar", icon: "building" },
     ]
 
     return (

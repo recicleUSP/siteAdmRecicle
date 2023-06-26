@@ -1,0 +1,90 @@
+import Image from "next/image" 
+import { useState } from "react";  
+import Link from "next/link";
+import { useRouter } from 'next/router';
+import { auth } from "../../utils/firebaseConfig";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { signIn } from "next-auth/react";
+
+export default function LoginAdmin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  async function handleSignIn(e) {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+    });
+
+    if (res.ok == true) {
+        router.push({
+            pathname: '/manager/gerenciar',
+        },
+        '/manager/gerenciar')
+    }
+  }
+
+    return(
+        <div className="h-screen w-full overflow-hidden relative">
+        <div className="flex flex-row h-screen justify-between ">
+            <div className="basis-1/2 flex">
+                <div className="my-auto px-24 w-full">
+                    <div className="mb-20">
+                        <Image width={296*0.6} height={58*0.6} priority src={"/image/logo.png"} alt="Logo Recicle++"/>
+                    </div>
+                    <div className="flex flex-col gap-3 lg:gap-6">
+                        <div className="">
+                            <h1 className="font-display text-3xl">Login</h1>
+                            <p className="font-Poppins text-sm text-cinza-claro">Entrar na conta da instituição</p>
+                        </div>
+                        <div className="py-2 ">
+                            <div>
+                                <p className="text-sm">E-mail</p>
+                                <input className="w-full text-lg mt-1  border-solid border rounded-input border-verde-padrao" onChange={(e) => setEmail(e.target.value)} type="email" />
+                            </div>
+                            <div className="mt-4">
+                                <p className="text-sm">Senha</p>
+                                <input className="w-full text-lg mt-1 border-solid border rounded-input border-verde-padrao" onChange={(e) => setPassword(e.target.value)} type="password" />
+                            </div>
+                            <div className="flex justify-between">
+                                <div></div>
+                                <div>
+                                    <a href="/esquecisenha" className="underline hover:underline-offset-1 text-xs ml-1 text-verde-padrao houver:underline-offset-1">Esqueci minha senha</a>
+                                </div>                                    
+                            </div>
+                            <div className="flex py-1">
+                                <input type="checkbox" className="border  border-verde-padrao" name="ManterCanectado" id="" />
+                                <p className="px-1 text-sm ">Mantenha-me conectado</p>
+                            </div>
+                            <div className="flex place-content-center justify-between px-8 py-4 ">
+                                <div className="btn btn-white w-full border mr-8 border-solid border-verde-padrao bold ">
+                                    <Link rel="stylesheet" href="/" passHref>
+                                        <button type="button"  className="w-full">Voltar</button>
+                                    </Link>
+                                </div>
+                                <div className="btn btn-green w-full">
+                                    <button type="button" onClick={handleSignIn} className="w-full">Entrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>   
+            </div>
+            <div className="bg-verde-padrao basis-1/2 relative col-span-5">
+                <div className="absolute w-full h-96 bottom-0 z-10">
+                    <Image src="/image/lixo.svg" layout="fill"/>
+                </div>
+                <div className="bg-[url('/image/Vector-login.svg')] w-full h-64 bg-cover bottom-0 absolute bg-center"></div>
+            </div>
+        </div>
+    </div>
+    )
+
+}

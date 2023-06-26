@@ -3,7 +3,6 @@ export interface Institution {
 	email: string,
 	phone: string,
 	cnpj: string,
-	password: string,
 	address: {
 		street: string,
 		street_number: number,
@@ -32,10 +31,14 @@ export interface Picker {
 	}
 }
 
-export interface Manager {
-	name: string,
-	cpf: string,
-	email: string,
-	phone: string,
-	institution_id?: any
+interface User {
+	name: string;
+	email: string;
+	cpf: string;
+	phone: string;
+	birthDate: Date;
+}
+
+export interface Manager extends User {
+	cnpj?: string;
 }

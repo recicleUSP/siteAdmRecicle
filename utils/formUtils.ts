@@ -1,4 +1,4 @@
-import { Institution, Picker } from "./types/users";
+import { Institution, Manager, Picker } from "./types/users";
 import { isEqual } from "lodash";
 
 export function removeEmptyFields(data : Object) : Object {
@@ -32,13 +32,28 @@ export function getQueriesFromObject (obj : Object) : string {
     return "?" + Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
 }
 
+export function formatObjectAsManager (obj) : Manager {  
+    let object : Manager = {
+        name: obj.name,
+        email: obj.email,
+        cpf: obj.cpf,
+        phone: obj.phone,
+        birthDate: obj.birthDate
+    }
+
+    if(obj.cnpj) {
+        object.cnpj = obj.cnpj;
+    }
+
+    return object;
+}
+
 export function formatObjectAsInstitution (obj) : Institution {
     return {
         name: obj.name,
         email: obj.email,
         phone: obj.phone,
         cnpj: obj.cnpj,
-        password: obj.password,
         address: {
             street: obj.street,
             street_number: obj.street_number,
