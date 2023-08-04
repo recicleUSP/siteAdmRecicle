@@ -1,13 +1,24 @@
 import Image from "next/image"   
+import { getSession } from "next-auth/react"
 import Header from "../../estruturas/header"
-import DadosInstituicao from "../../estruturas/dadosInstituicao"
+import DadosInstitution  from "../../estruturas/dadosInstitution"
 
-export default function cadastrarInstituicao() {
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    const user = session.user;
+    return { 
+        props: { 
+            user,
+        },
+    }
+  }
+
+export default function cadastrarInstitution({ user }) {
     return(
         <div className={"bg-background-light h-screen w-full overflow-hidden relative"}> 
             <div className="container lg:px-6 px-2 mx-auto max-w-normal h-full">
                 <Header />
-                <DadosInstituicao type="cadastro"/>
+                <DadosInstitution type="cadastro" user={user}/>
                
             </div>
             {/* <div className="absolute bottom-0 left-0 hidden lg:block">

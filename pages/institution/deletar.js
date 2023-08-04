@@ -1,4 +1,5 @@
 import { collection, doc, getDoc } from "firebase/firestore"
+import { useRouter } from "next/router"
 import Header from "../../estruturas/header"
 import { database } from "../../utils/firebaseConfig"
 import Link from "next/link"
@@ -15,9 +16,10 @@ export async function getServerSideProps (context) {
 
 }
  
-export default function DeleteInstituicao ({ data }) {
+export default function DeleteInstitution ({ data }) {
     const parsedData = JSON.parse(data)
     const { name, id } = parsedData
+    const router = useRouter();
 
     return (
     <div>
@@ -33,7 +35,7 @@ export default function DeleteInstituicao ({ data }) {
                         <Link href="/instituicao/gerenciar" passHref>
                             <button className="btn btn-white">Voltar</button>
                         </Link>
-                        <button className="btn btn-red" onClick={() => deleteInstitution(id)}>
+                        <button className="btn btn-red" onClick={() => {deleteInstitution(id); router.back();}}>
                             Deletar
                         </button>
                     </div>

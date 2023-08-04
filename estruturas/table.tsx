@@ -87,7 +87,7 @@ export default function defTable ({ head, obj, page } :
                             return (
                                 <tr key={index}>
                                     {
-                                        head.map((headItem : HeadObj, headIndex) => (
+                                        head.map((headItem : HeadObj, headIndex) => (             
                                             <td key={headIndex} className={`px-4 text-sm font-semibold py-2 ${ isColored ? "bg-gray-100" : "bg-white"}`}>
                                                 <Picker page={page} type={headItem.type} value={item[headItem.key]}/>
                                             </td>

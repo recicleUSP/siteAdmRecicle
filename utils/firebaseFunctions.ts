@@ -1,8 +1,39 @@
 import { formatObjectAsInstitution, formatObjectAsManager, formatObjectAsPicker, removeEmptyFields } from "./formUtils";
-import { addDoc, setDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, setDoc, getDoc, getDocs,   collection, doc, query, where, updateDoc, deleteDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { database } from "../utils/firebaseConfig";
 import { Institution, Manager, Picker } from "./types/users";
+
+export async function search (key: string, data: string, col: string) : Promise<any> {
+  const docRef = collection(database, col);
+  try {
+    const q = query(docRef, where(key, "==", data));
+    const docSnap = await getDocs(q);
+    const response = docSnap.forEach(doc => doc.data());
+    if(!docSnap.empty) {
+      return response;
+    } else {
+      console.log("Document does not exist");
+    }
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function getById (id: string, col: string) : Promise<any> {
+  const docRef = doc(database, col, id);
+  try {
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()) {
+        return docSnap.data();
+    } else {
+        console.log("Document does not exist");
+    }
+
+  } catch(error) {
+    console.log(error);
+  }
+}
 
 export async function createManager (password: string, data : any) : Promise<void> {
     console.log("data " + data);
@@ -32,11 +63,9 @@ export async function createManager (password: string, data : any) : Promise<voi
 
 //Institution functions
 export async function createInstitution (data : any) : Promise<void> {
-  const institution : Institution = formatObjectAsInstitution(data);
-
   const docRef = collection(database, "institutions");
       
-  addDoc(docRef, institution)
+  addDoc(docRef, data)
   .catch((error) => {
       console.log(error.code+": "+error.message);
   });

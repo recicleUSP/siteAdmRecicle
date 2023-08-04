@@ -13,22 +13,32 @@ interface FormData {
     submitFunction?: any
 }
 
-export default function DadosInstitution({ type, defaultData }: { type: string, defaultData?: any }) {
+export default function DadosInstitution({ type, defaultData, user }: { type: string, defaultData?: any, user?: any }) {
 
     const router = useRouter();
     const setarValores = (type, defData, id) : FormData => {
         const cadastrar = async (values, e) => {
             e.preventDefault()
-            const data = removeEmptyFields(values) as any;
+            let data = removeEmptyFields(values) as any;
+            data = formatObjectAsInstitution(data);
+            console.log(user);
+            if (user) {
+                data["manager_id"] = user.uid;
+                console.log(data);
+            }
             await createInstitution(data)
-            router.push("/manager/cadastrar");
+            router.back();
         };
     
         const editar = async (values, e) => {
             e.preventDefault()
             // const data = getNewFields(formatObjectAsInstitution(values), defData) as any;
-            const data = formatObjectAsInstitution(values) as any;
-            await editInstitution(data, id)
+            let data = formatObjectAsInstitution(values) as any;
+            if (user) {
+                data["manager_id"] = user.uid;
+            }
+            await editInstitution(data, id);
+            router.back();
         }
     
         switch (type) {
@@ -60,6 +70,7 @@ export default function DadosInstitution({ type, defaultData }: { type: string, 
     const id = router.query.id;
     const { title, buttonText, buttonType, submitFunction } = setarValores(type, previousData, id);
     const methods = useForm()
+    console.log(previousData);
 
     return (
         <div className="bg-white py-10 mt-2 border rounded-lg lg:px-10 px-5">
@@ -69,11 +80,11 @@ export default function DadosInstitution({ type, defaultData }: { type: string, 
                 <div className="py-4">
                         <InputModel defaultValue={previousData.name} title="NOME" type="text" name="name" required/>
                     <div className="grid grid-cols-2 gap-2 mt-4">
-                        <InputModel defaultValue={previousData.cpf} title="TELEFONE" type="text" name="phone" mask="(99) 99999-9999" required/>
+                        <InputModel defaultValue={previousData.phone} title="TELEFONE" type="text" name="phone" mask="(99) 99999-9999" required/>
                         <InputModel defaultValue={previousData.email} title="EMAIL" type="email" name="email" required/>
                     </div>
                     <div className="grid lg:grid-cols-3 grid-cols-2 gap-2 mt-4">
-                        <InputModel defaultValue={previousData.cpf} title="CNPJ" type="text" name="cnpj" mask="99.999.999/0009-99"/>
+                        <InputModel defaultValue={previousData.cnpj} title="CNPJ" type="text" name="cnpj" mask="99.999.999/0009-99"/>
                         <InputModel defaultValue={previousData.address.cep} title="CEP" type="text"  name="cep" mask="99999-999" />
                         <InputModel defaultValue={previousData.address.state_inscription} className="col-span-2 lg:col-span-1" 
                         title="INSCRIÇÃO ESTADUAL" type="text" name="state_inscription"/>
@@ -87,11 +98,9 @@ export default function DadosInstitution({ type, defaultData }: { type: string, 
                 </div>
                 
                 <div className="flex justify-end gap-4 mt-5">
-                    <Link rel="stylesheet" href="/manager/cadastrar" passHref> 
-                        <button className={`btn btn-white1 !px-10 cursor-pointer !py-2.5 !rounded-lg`}>
-                            <p className="text-xxs font-medium">Voltar</p> 
-                        </button>
-                    </Link> 
+                    <button onClick={() => {router.back();}} className={`btn btn-white1 !px-10 cursor-pointer !py-2.5 !rounded-lg`}>
+                        <p className="text-xxs font-medium">Voltar</p> 
+                    </button>
                     
                     {/* <Link rel="stylesheet" href="/Instituicao/gerenciar" passHref> */}
                         <button type="submit" className={`btn ${buttonType} !px-10 cursor-pointer !py-2.5 !rounded-lg`}>
