@@ -136,7 +136,7 @@ export default function DadosAdmin({ type, defaultData }: { type: string, defaul
                                         <p className="text-xxs font-medium">SIM</p> 
                                     </button>
                                     
-                                    {<Link rel="stylesheet" href="/manager/institution" passHref>
+                                    {<Link rel="stylesheet" href="/institution/cadastrar" passHref>
                                         <button type="button" className={`btn text-white bg-red-700 !px-10 cursor-pointer !py-2.5 !rounded-lg`}>
                                             <p className="text-xxs font-medium">NÃO</p>
                                         </button>
